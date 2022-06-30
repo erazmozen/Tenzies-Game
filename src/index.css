@@ -1,13 +1,111 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: rgb(195, 34, 34);
+  background: linear-gradient(
+    0deg,
+    rgba(195, 34, 34, 1) 0%,
+    rgba(253, 187, 45, 1) 100%
+  );
+  font-family: "Poppins", sans-serif;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  background: white;
+  padding: 2rem;
+  height: 400px;
+  max-width: 800px;
+  border-radius: 10px;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dice-container {
+  display: grid;
+  grid-template: auto auto / repeat(5, 1fr);
+  gap: 20px;
+  margin-bottom: .6rem;
+}
+
+.die-face {
+  height: 50px;
+  width: 50px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e27328;
+  transition: all 0.1s ease-in;
+  cursor: pointer;
+}
+
+.die-face:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.25);
+}
+
+.die-face:hover {
+  background-color: #d65425;
+}
+
+.die-num {
+  font-size: 1.4rem;
+  color: white;
+}
+
+.roll-dice {
+  height: 60px;
+  border-radius: 10px;
+  color: wheat;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: #d65425;
+  padding: 0 1.6rem;
+  border: none;
+  transition: background-color 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.roll-dice:hover {
+  background-color: #e27328;
+}
+
+.roll-dice:focus {
+  outline: none;
+}
+
+.roll-dice:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.25);
+}
+
+.instructions {
+  text-align: center;
+  font-size: 1.24rem;
+  line-height: 1.3rem;
+  max-width: 500px;
 }
