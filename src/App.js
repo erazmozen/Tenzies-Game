@@ -2,25 +2,24 @@ import React, { useState } from "react";
 import Die from "./components/Die";
 import "./index.css";
 import { nanoid } from "nanoid";
-import Confetti from 'react-confetti'
+import Confetti from "react-confetti";
 
 export default function App() {
-
   const [dice, setDice] = React.useState(allNewDice());
-  const [tenzies, setTenzies] = React.useState(false)
+  const [tenzies, setTenzies] = React.useState(false);
 
   React.useEffect(() => {
-    const allHeld = dice.every(die => die.isHeld)
+    const allHeld = dice.every((die) => die.isHeld);
     // .evety je array metoda kao if, koja radi na svim clanovima matrice
     // i ako svi ispunjavaju uslov vraca TRUE
-    const firstValue = dice[0].value
-    const allSameValue = dice.every(die => die.value === firstValue)
+    const firstValue = dice[0].value;
+    const allSameValue = dice.every((die) => die.value === firstValue);
     if (allHeld && allSameValue) {
-      setTenzies(true)
-      console.log("Game won!!")
-  }
-    console.log("State change")
-  }, [dice])
+      setTenzies(true);
+      console.log("Game won!!");
+    }
+    console.log("State change");
+  }, [dice]);
 
   /**
    * Ovde koristimo useEffect kako bismo sinhonizovali ova dva
@@ -32,12 +31,11 @@ export default function App() {
       value: Math.ceil(Math.random() * 6),
       isHeld: false,
       id: nanoid(),
-    }
+    };
   }
   // Ovo je samo helper funkcija da ne bismo imali ponavljanje koda
 
   function allNewDice() {
-
     /**
      * Plan:
      * Treba nam nacin na koji mozemo da generisemo 10 random
@@ -60,30 +58,35 @@ export default function App() {
   }
 
   function rollDice() {
-    if(!tenzies) {
-        setDice(oldDice => oldDice.map(die => {
-            return die.isHeld ? 
-                die :
-                generateNewDie()
-        }))
+    if (!tenzies) {
+      setDice((oldDice) =>
+        oldDice.map((die) => {
+          return die.isHeld ? die : generateNewDie();
+        })
+      );
     } else {
-        setTenzies(false)
-        setDice(allNewDice())
+      setTenzies(false);
+      setDice(allNewDice());
     }
-}
+  }
 
   function holdDice(id) {
-    setDice(oldDice => oldDice.map(die => {
-      return die.id === id
-      ? {...die, isHeld: !die.isHeld}
-      : die
-    }))
+    setDice((oldDice) =>
+      oldDice.map((die) => {
+        return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
+      })
+    );
   }
 
   const diceElements = dice.map((die) => (
     // Pravimo novu variablu i u nju ubacujemo objekte koje dobijamo
     // tako sto mapujemo preko state variable
-    <Die key={die.id} value={die.value} isHeld={die.isHeld} holdDice={ () => holdDice(die.id) } />
+    <Die
+      key={die.id}
+      value={die.value}
+      isHeld={die.isHeld}
+      holdDice={() => holdDice(die.id)}
+    />
     // Props koje zelimo da pratimo, vrv cemo ih menjati
   ));
 
@@ -94,12 +97,12 @@ export default function App() {
     <main>
       {tenzies && <Confetti />}
       <h1 className="title">Tenzies</h1>
-      <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+      <p className="instructions">
+        Roll until all dice are the same. Click each die to freeze it at its
+        current value between rolls.
+      </p>
       <div className="dice-container">{diceElements}</div>
-      <button
-      className="roll-dice"
-      onClick={rollDice}
-      >
+      <button className="roll-dice" onClick={rollDice}>
         {tenzies ? "New Game" : "Roll"}
       </button>
     </main>

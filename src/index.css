@@ -49,7 +49,7 @@ main {
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);
   gap: 20px;
-  margin-bottom: .6rem;
+  margin-bottom: 0.6rem;
 }
 
 .die-face {
