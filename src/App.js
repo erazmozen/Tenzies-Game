@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Die from "./components/Die";
 import "./index.css";
 import { nanoid } from "nanoid";
